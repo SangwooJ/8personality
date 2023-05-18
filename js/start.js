@@ -89,8 +89,23 @@ function setResult(){
   });
   
   const resultDesc = document.querySelector('.resultDesc');
-  resultDesc.innerHTML = infoList[0].desc
+  resultDesc.innerHTML = infoList[0].desc;
   
+  const magicCode = document.querySelector('#magic-code');
+  const results = {
+    p0 : p0,
+    p1 : p1,
+    p2 : p2,
+    p3 : p3,
+    p4 : p4,
+    p5 : p5,
+    p6 : p6,
+    p7 : p7,
+  };
+  const magicCodeString = Object.entries(results)
+  .map(([key, value]) => `${key}=${value}`)
+  .join('&');
+  magicCode.innerHTML = magicCodeString;
 }
 
 function goResult(){
@@ -169,4 +184,87 @@ function begin(){
     let qIdx = 0;
     goNext(qIdx);
   }, 450);
+}
+
+function getFriendValue() {
+  var magicCodeInput = document.getElementById('magic-code-input').value;
+  const magicCodeObject = {};
+  magicCodeInput.split('&').forEach(pair => {
+    const [key, value] = pair.split('=');
+    magicCodeObject[key] = parseInt(value);
+  });
+  const element = document.getElementById("myChart");
+  if (element) {
+    element.remove();
+  } else {
+    console.error("Element not found or is null.");
+  }
+  
+
+  let p0 = Math.round((scores[0]/20)*100);
+  let p1 = Math.round((scores[1]/20)*100);
+  let p2 = Math.round((scores[2]/20)*100);
+  let p3 = Math.round((scores[3]/20)*100);
+  let p4 = Math.round((scores[4]/16)*100);
+  let p5 = Math.round((scores[5]/16)*100);
+  let p6 = Math.round((scores[6]/20)*100);
+  let p7 = Math.round((scores[7]/16)*100);
+
+  const imgDiv = document.querySelector('#resultImg');
+  // Create a new canvas element
+  const canvas = document.createElement('canvas');
+  canvas.id = 'myChart';
+
+  // Append the new canvas to the body (or another container element)
+  imgDiv.appendChild(canvas);
+
+  // Get the context of the newly created canvas
+  const ctx = canvas.getContext('2d');
+  const data = {
+    labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡성'],
+    datasets: [{
+      label: '나',
+      data: [p0, p1, p2, p3, p4, p5, p6, p7],
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgb(54, 162, 235)',
+      pointBackgroundColor: 'rgb(54, 162, 235)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(54, 162, 235)'
+    }, {
+      label: '상대',
+      data: Object.values(magicCodeObject).map(value => parseInt(value, 10)),
+      fill: true,
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgb(255, 99, 132)',
+      pointBackgroundColor: 'rgb(255, 99, 132)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(255, 99, 132)'
+    }]
+  };
+  new Chart(ctx, {
+      type: 'radar',
+      data: data,
+      options: {
+        scales: {
+            r: {
+                angleLines: {
+                  display: true
+              },
+                suggestedMax: 100,
+                suggestedMin: 0,
+            }
+        },
+        elements: {
+          line: {
+            borderWidth: 3
+          }
+        }
+    }
+  });
+  console.log(magicCodeObject);
+  // 여기서 inputValue 변수를 원하는 방식으로 활용할 수 있습니다.
+  // 예: 다른 함수 호출, 변수에 할당 등
 }
