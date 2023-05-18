@@ -23,7 +23,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/default.css">
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/qna.css">
@@ -98,10 +98,27 @@
       당신의 매직코드 :
       <div id="magic-code">
       </div>
+      <button class="btn btn-secondary btn-sm" onclick="copyToClipboard()">눌러서 복사해두기</button>
+      <script>
+        function copyToClipboard() {
+          const magicCodeDiv = document.getElementById("magic-code");
+          const textToCopy = magicCodeDiv.innerText;
+
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+              alert("Copied to clipboard!");
+            })
+            .catch((error) => {
+              console.error("Failed to copy:", error);
+            });
+        }
+      </script>
       <br>
+      
       <div class="input-group mb-3">
+        <br>
         <span class="input-group-text" id="magic-code-sp">Magiccode</span>
-        <input type="text" class="form-control" placeholder="친구의 매직코드를 붙혀 넣으세요" id="magic-code-input">
+        <input type="text" class="form-control" placeholder="친구의 매직코드 붙혀 넣기" id="magic-code-input">
       </div>
       <button type="button" class="btn btn-primary btn-sm" onclick="getFriendValue()">눌러서 친구와 비교</button>
       <div class="friend">
