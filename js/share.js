@@ -1,4 +1,4 @@
-const url = 'https://artistrytest.netlify.app/';
+const url = 'https://8personality.netlify.app/';
 
 function setShare(){
   //var resultImg = document.querySelector('#resultImg');

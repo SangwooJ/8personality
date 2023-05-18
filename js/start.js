@@ -3,7 +3,7 @@ const qna = document.querySelector("#qna");
 const result = document.querySelector("#result");
 
 const endPoint = qnaList.length;
-const scores = [0, 0, 0];
+const scores = [0, 0, 0, 0, 0, 0, 0, 0];
 
 
 console.log(endPoint);
@@ -17,10 +17,14 @@ function calResult(){
 */
 
 function setResult(){
-  let sense = (scores[0]/20)*100;
-  let view = (scores[1]/24)*100;
-  let create = (scores[2]/20)*100;
-  let total = Math.round((sense+view+create)/3);
+  let p0 = Math.round((scores[0]/20)*100);
+  let p1 = Math.round((scores[1]/20)*100);
+  let p2 = Math.round((scores[2]/20)*100);
+  let p3 = Math.round((scores[3]/20)*100);
+  let p4 = Math.round((scores[4]/16)*100);
+  let p5 = Math.round((scores[5]/16)*100);
+  let p6 = Math.round((scores[6]/20)*100);
+  let p7 = Math.round((scores[7]/16)*100);
 
   const resultName = document.querySelector('.resultname');
   resultName.innerHTML = infoList[0].name;
@@ -53,10 +57,10 @@ function setResult(){
   new Chart(ctx, {
       type: 'polarArea',
       data: {
-          labels: ['감각', '감상', '창작'],
+          labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡도'],
           datasets: [{
               //label: 'score',
-              data: [sense, view, create],
+              data: [p0, p1, p2, p3, p4, p5, p6, p7],
               //borderWidth: 1
           }]
       },
@@ -70,7 +74,7 @@ function setResult(){
   });
 
   const resultDesc = document.querySelector('.resultDesc');
-  resultDesc.innerHTML = '총점: ' + total +'점!';
+  resultDesc.innerHTML = '';
 }
 
 function goResult(){
