@@ -3,16 +3,21 @@ const url = 'https://8personality.netlify.app/';
 function setShare(){
   //var resultImg = document.querySelector('#resultImg');
   var resultAlt = 0;
-  const shareTitle = '예술성테스트 결과';
+  const shareTitle = '팔각 성격 다이어그램 결과';
   const shareDes = infoList[resultAlt].name;
   const shareImage = url + 'img/main.png';
   //const shareURL = url + 'page/result-' + resultAlt + '.html';
   const shareURL = url + 'page/result';
 
   const params = {
-    parameter1: Math.round((scores[0]/20)*100),
-    parameter2: Math.round((scores[1]/24)*100),
-    parameter3: Math.round((scores[2]/20)*100),
+    p0: Math.round((scores[0]/20)*100),
+    p1: Math.round((scores[1]/20)*100),
+    p2: Math.round((scores[2]/20)*100),
+    p3: Math.round((scores[3]/20)*100),
+    p4: Math.round((scores[4]/16)*100),
+    p5: Math.round((scores[5]/16)*100),
+    p6: Math.round((scores[6]/20)*100),
+    p7: Math.round((scores[7]/16)*100),
     //parameter4: Math.round((parameter1+parameter2+parameter3)/3),
   };
   

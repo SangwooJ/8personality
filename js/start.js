@@ -89,7 +89,7 @@ function setResult(){
   });
   
   const resultDesc = document.querySelector('.resultDesc');
- 
+  resultDesc.innerHTML = infoList[0].desc
   
 }
 
