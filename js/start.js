@@ -53,24 +53,23 @@ function setResult(){
 
   // Get the context of the newly created canvas
   const ctx = canvas.getContext('2d');
-
+  const data = {
+    labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡성'],
+    datasets: [{
+      label: '나',
+      data: [p0, p1, p2, p3, p4, p5, p6, p7],
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgb(54, 162, 235)',
+      pointBackgroundColor: 'rgb(54, 162, 235)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(54, 162, 235)'
+    }]
+  };
   new Chart(ctx, {
       type: 'radar',
-      data: {
-          labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡도'],
-          datasets: [{
-              label: '나',
-              data: [p0, p1, p2, p3, p4, p5, p6, p7],
-              fill: true,
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgb(54, 162, 235)',
-              pointBackgroundColor: 'rgb(54, 162, 235)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgb(54, 162, 235)'
-              
-          }]
-      },
+      data: data,
       options: {
         scales: {
             r: {
@@ -86,12 +85,12 @@ function setResult(){
             borderWidth: 3
           }
         }
-        
     }
   });
-
+  
   const resultDesc = document.querySelector('.resultDesc');
-  resultDesc.innerHTML = '';
+ 
+  
 }
 
 function goResult(){
