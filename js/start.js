@@ -55,21 +55,38 @@ function setResult(){
   const ctx = canvas.getContext('2d');
 
   new Chart(ctx, {
-      type: 'polarArea',
+      type: 'radar',
       data: {
           labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡도'],
           datasets: [{
-              //label: 'score',
+              label: '나',
               data: [p0, p1, p2, p3, p4, p5, p6, p7],
-              //borderWidth: 1
+              fill: true,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgb(54, 162, 235)',
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgb(54, 162, 235)'
+              
           }]
       },
       options: {
         scales: {
             r: {
+                angleLines: {
+                  display: true
+              },
                 suggestedMax: 100,
+                suggestedMin: 0,
             }
+        },
+        elements: {
+          line: {
+            borderWidth: 3
+          }
         }
+        
     }
   });
 
