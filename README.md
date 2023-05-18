@@ -1,6 +1,6 @@
-# ArtistryTest
+# 8Personality Test
 
-[Go for your artistry test result](https://artistrytest.netlify.app/)
+[Go for your artistry test result](https://*.netlify.app/)
 
 
 - Improved the base code available at [https://github.com/nani6765/MyMBTI].
