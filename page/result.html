@@ -74,7 +74,7 @@
         const data = {
           labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡성'],
           datasets: [{
-            label: '나',
+            label: '공유자',
             data: [p0, p1, p2, p3, p4, p5, p6, p7],
             fill: true,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -108,7 +108,7 @@
         
       </script>
 
-      당신의 매직코드 :
+      공유자의 매직코드 :
       <div id="magic-code">
       </div>
       <button class="btn btn-secondary btn-sm" onclick="copyToClipboard()">눌러서 복사해두기</button>
@@ -140,17 +140,101 @@
         .map(([key, value]) => `${key}=${value}`)
         .join('&');
         magicCode.innerHTML = magicCodeString;
-      
+        
+
+
       </script>
       <br>
 
+      
+      
+      <div class="input-group mb-3">
+        <br>
+        <span class="input-group-text" id="magic-code-sp">Magiccode</span>
+        <input type="text" class="form-control" placeholder="비교할 매직코드 붙혀 넣기" id="magic-code-input">
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" onclick="getFriendValue()">눌러서 친구와 비교</button>
+      <div class="friend">
+
+      <script>
+        function getFriendValue() {
+          var magicCodeInput = document.getElementById('magic-code-input').value;
+          const magicCodeObject = {};
+          magicCodeInput.split('&').forEach(pair => {
+            const [key, value] = pair.split('=');
+            magicCodeObject[key] = parseInt(value);
+          });
+          const element = document.getElementById("myChart");
+          if (element) {
+            element.remove();
+          } else {
+            console.error("Element not found or is null.");
+          }
+          
+          const imgDiv = document.querySelector('#resultImg');
+          // Create a new canvas element
+          const canvas = document.createElement('canvas');
+          canvas.id = 'myChart';
+
+          // Append the new canvas to the body (or another container element)
+          imgDiv.appendChild(canvas);
+
+          // Get the context of the newly created canvas
+          const ctx = canvas.getContext('2d');
+          const data = {
+            labels: ['외향성', '타인에 대한 관심', '타인에 대한 공감', '예술성', '창의,상상력', '지적 호기심,정보력', '이성,논리', '복잡성'],
+            datasets: [{
+              label: '공유자',
+              data: [p0, p1, p2, p3, p4, p5, p6, p7],
+              fill: true,
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgb(54, 162, 235)',
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgb(54, 162, 235)'
+            }, {
+              label: '비교대상',
+              data: Object.values(magicCodeObject).map(value => parseInt(value, 10)),
+              fill: true,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgb(255, 99, 132)',
+              pointBackgroundColor: 'rgb(255, 99, 132)',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: 'rgb(255, 99, 132)'
+            }]
+          };
+          new Chart(ctx, {
+              type: 'radar',
+              data: data,
+              options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                          display: true
+                      },
+                        suggestedMax: 100,
+                        suggestedMin: 0,
+                    }
+                },
+                elements: {
+                  line: {
+                    borderWidth: 3
+                  }
+                }
+            }
+          });
+        }
+      </script>
       <script type="text/javascript">
         function moveHome(){
           location.href = "/index.html";
         }
       </script>
       <button type="button" class="gohome mt-3 py-2 px-3" onclick="js:moveHome()">나도 참여하기</button>
-    
+
+
     </section>
     <ins class="kakao_ad_area" style="display:none;"
       data-ad-unit = "DAN-tSMADn9bPHojhcTa"
