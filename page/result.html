@@ -34,6 +34,15 @@
      crossorigin="anonymous"></script>
   </head>
   <body>
+    <!-- Coupang Partners -->
+    <div class="d-flex justify-content-center">
+      <script src="https://ads-partners.coupang.com/g.js"></script>
+      <script>
+          new PartnersCoupang.G({"id":663743,"template":"carousel","trackingCode":"AF4981160","width":"350","height":"150"});
+      </script>
+    </div>
+
+
     <section id="shareResult" class="mx-auto my-5 py-5 px-3">
       <h1>당신의 결과는?!</h1>
       <div class="resultname">
@@ -97,13 +106,57 @@
           }
         });
         
-        </script>
+      </script>
+
+      당신의 매직코드 :
+      <div id="magic-code">
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="copyToClipboard()">눌러서 복사해두기</button>
+      <script>
+        function copyToClipboard() {
+          const magicCodeDiv = document.getElementById("magic-code");
+          const textToCopy = magicCodeDiv.innerText;
+
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+              alert("Copied to clipboard!");
+            })
+            .catch((error) => {
+              console.error("Failed to copy:", error);
+            });
+        }
+        const magicCode = document.querySelector('#magic-code');
+        const results = {
+          p0 : p0,
+          p1 : p1,
+          p2 : p2,
+          p3 : p3,
+          p4 : p4,
+          p5 : p5,
+          p6 : p6,
+          p7 : p7,
+        };
+        const magicCodeString = Object.entries(results)
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&');
+        magicCode.innerHTML = magicCodeString;
+      
+      </script>
+      <br>
+
       <script type="text/javascript">
         function moveHome(){
           location.href = "/index.html";
         }
       </script>
       <button type="button" class="gohome mt-3 py-2 px-3" onclick="js:moveHome()">나도 참여하기</button>
+    
     </section>
+    <ins class="kakao_ad_area" style="display:none;"
+      data-ad-unit = "DAN-tSMADn9bPHojhcTa"
+      data-ad-width = "320"
+      data-ad-height = "100"></ins>
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+  
   </body>
 </html>
